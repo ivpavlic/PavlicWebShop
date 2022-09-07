@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PavlicWebShop.Models.Dbo;
 using PavlicWebShop.Models.Dbo.Base;
+using PavlicWebShop.Models.ViewModel;
 
 namespace PavlicWebShop.Data
 {
@@ -70,6 +71,8 @@ namespace PavlicWebShop.Data
         public DbSet<ShoppingCartItem> ShoppingCartItem { get; set; }
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
         public DbSet<Order> Order { get; set; }
+        public DbSet<PavlicWebShop.Models.ViewModel.ProductViewModel>? ProductViewModel { get; set; }
+        public DbSet<PavlicWebShop.Models.ViewModel.ProductCategoryViewModel>? ProductCategoryViewModel { get; set; }
 
     }
 }

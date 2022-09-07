@@ -1,0 +1,55 @@
+﻿@model IEnumerable<PavlicWebShop.Models.ViewModel.ProductViewModel>
+
+@{
+    ViewData["Title"] = "ProductsList";
+}
+
+<h1>ProductsList</h1>
+
+@*<p>
+    <a asp-action="AddProduct">Create New</a>
+</p>*@
+<a class="btn btn-primary" href="@Url.Action("AddProduct", "Product")">Dodaj novi proizvod</a>
+<a class="btn btn-primary" href="@Url.Action("ProductCategorysList", "Product")">Dodaj novu kategoriju</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="UpdateProductCategory" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
