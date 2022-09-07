@@ -30,6 +30,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.Configure<AppConfig>(builder.Configuration);
 builder.Services.AddSingleton<IIdentityService, IdentityService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 

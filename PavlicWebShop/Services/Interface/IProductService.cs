@@ -5,11 +5,20 @@ namespace PavlicWebShop.Services.Interface
 {
     public interface IProductService
     {
+        Task<OrderViewModel> SuspendOrder(int id);
+        Task<ProductViewModel> UpdateProduct(ProductUpdateBinding model);
+        Task UpdateShoppinCartStatus();
+        Task<OrderViewModel> GetOrder(int id);
+        Task<List<OrderViewModel>> GetOrders();
+        Task<OrderViewModel> AddOrder(OrderBinding model);
+        Task<ShoppingCartViewModel> GetShoppingCart(string userId);
         Task<ProductViewModel> AddProduct(ProductBinding model);
-        Task<ProductCategoryViewModel> AddProductCategory(ProductCategoryBinding model);
         Task<ProductViewModel> GetProduct(int id);
-        Task<ProductCategoryViewModel> GetProductCategory(int id);
-        Task<List<ProductCategoryViewModel>> GetProductCategorys();
         Task<List<ProductViewModel>> GetProducts();
+        Task<ProductCategoryViewModel> UpdateProductCategory(ProductCategoryUpdateBinding model);
+        Task<List<ProductCategoryViewModel>> GetProductCategorys();
+        Task<ProductCategoryViewModel> GetProductCategory(int id);
+        Task<ProductCategoryViewModel> AddProductCategory(ProductCategoryBinding model);
+        Task<ShoppingCartViewModel> AddShoppingCart(ShoppingCartBinding model);
     }
 }

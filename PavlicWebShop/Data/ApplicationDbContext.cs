@@ -5,12 +5,14 @@ using PavlicWebShop.Models.Dbo.Base;
 
 namespace PavlicWebShop.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+
+
         public override int SaveChanges()
         {
 
@@ -60,8 +62,6 @@ namespace PavlicWebShop.Data
 
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
-
-
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Adress> Adress { get; set; }

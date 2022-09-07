@@ -2,7 +2,7 @@
 
 namespace PavlicWebShop.Models.Binding
 {
-    public class ShoppingChartBinding : ShoppingChartBase
+    public class ShoppingCartBinding : ShoppingChartBase
     {
         public int ProductId { get; set; }
         public decimal Quantity { get; set; }

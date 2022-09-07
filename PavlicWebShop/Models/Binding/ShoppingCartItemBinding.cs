@@ -1,6 +1,6 @@
 ﻿namespace PavlicWebShop.Models.Binding
 {
-    public class ShoppingChartItemBinding
+    public class ShoppingCartItemBinding
     {
     }
 }
