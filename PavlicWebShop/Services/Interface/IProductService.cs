@@ -15,6 +15,8 @@ namespace PavlicWebShop.Services.Interface
         Task<ProductViewModel> AddProduct(ProductBinding model);
         Task<ProductViewModel> GetProduct(int id);
         Task<List<ProductViewModel>> GetProducts();
+        Task<List<ProductViewModel>> GetProductsRandom();
+        Task DeleteProduct(int id);
         Task<ProductCategoryViewModel> UpdateProductCategory(ProductCategoryUpdateBinding model);
         Task<List<ProductCategoryViewModel>> GetProductCategorys();
         Task<ProductCategoryViewModel> GetProductCategory(int id);

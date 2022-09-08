@@ -53,6 +53,10 @@
             </select>
         </div>
         <div class="form-group">
+            @Html.LabelFor(x=>x.ProductImgUrl)
+            <input type="file" name="ProductImg" class="form-control"/>
+        </div>
+        <div class="form-group">
             <input type="submit" class="btn btn-primary mt-5" value="Create">
         </div>
 

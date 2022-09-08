@@ -55,6 +55,13 @@ namespace PavlicWebShop.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> DetailsProduct(int id)
+        {
+            var product = await productService.GetProduct(id);
+            var model = mapper.Map<ProductUpdateBinding>(product);
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> UpdateProduct(ProductUpdateBinding model)
         {
@@ -76,10 +83,18 @@ namespace PavlicWebShop.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            await productService.DeleteProduct(id);
+            return RedirectToAction("ProductsList");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> AddProductCategory()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> AddProductCategory(ProductCategoryBinding model)
         {

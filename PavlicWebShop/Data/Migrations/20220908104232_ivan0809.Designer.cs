@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PavlicWebShop.Data;
 
@@ -11,9 +12,10 @@ using PavlicWebShop.Data;
 namespace PavlicWebShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220908104232_ivan0809")]
+    partial class ivan0809
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -341,7 +343,7 @@ namespace PavlicWebShop.Data.Migrations
                     b.Property<int>("ProductCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductImgUrl")
+                    b.Property<string>("ProductPhoto")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Quantity")

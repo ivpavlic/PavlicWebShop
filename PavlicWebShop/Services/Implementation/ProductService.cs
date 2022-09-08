@@ -16,12 +16,15 @@ namespace PavlicWebShop.Services.Implementation
         private readonly ApplicationDbContext db;
         private readonly IMapper mapper;
         private readonly AppConfig appConfig;
+        private readonly IFileStorageService fileStorageService;
 
-        public ProductService(ApplicationDbContext db, IMapper mapper, IOptions<AppConfig> appConfig)
+        public ProductService(ApplicationDbContext db,
+           IMapper mapper, IOptions<AppConfig> appConfig,IFileStorageService fileStorageService)
         {
             this.appConfig = appConfig.Value;
             this.db = db;
             this.mapper = mapper;
+            this.fileStorageService = fileStorageService;
         }
 
         /// <summary>
@@ -228,6 +231,18 @@ namespace PavlicWebShop.Services.Implementation
         public async Task<ProductViewModel> AddProduct(ProductBinding model)
         {
             var dbo = mapper.Map<Product>(model);
+
+            if (model.ProductImg != null)
+            {
+                var fileResponse = await fileStorageService.AddFileToStorage(model.ProductImg);
+                if (fileResponse != null)
+                {
+                    dbo.ProductImgUrl = fileResponse.DownloadUrl;
+                }
+
+            }
+
+
             var productCategory = await db.ProductCategory.FindAsync(model.ProductCategoryId);
             if (productCategory == null)
             {
@@ -261,6 +276,58 @@ namespace PavlicWebShop.Services.Implementation
             return dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
 
         }
+
+        /// <summary>
+        /// Dohvati sve proizvode
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<ProductViewModel>> GetProductsRandom()
+        {
+            var dbo = await db.Product
+               .Include(x => x.ProductCategory)
+               .ToListAsync();
+
+            //var model = dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
+
+            //var randomByQuery = model.OrderBy(x => Guid.NewGuid()).ToList();
+
+            // var response = new List<ProductViewModel>();
+            //var randomList = webShopCommonSharedService.GetRandomNumberList(model.First().Id, model.Last().Id);
+
+            // foreach (var item in randomList)
+            // {
+            //     var find = model.FirstOrDefault(x => x.Id == item);
+            //     if(find != null)
+            //     {
+            //         response.Add(find);
+            //     }
+            // }
+
+
+            //return response;
+
+            //return dbo.Select(x => mapper.Map<ProductViewModel>(x)).OrderBy(x => Guid.NewGuid()).ToList();
+
+            return dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
+
+            //return dbo.Select(x => mapper.Map<ProductViewModel>(x)).OrderBy(x => Guid.NewGuid()).ToList();
+        }
+        /// <summary>
+        /// Brisanje proizvoda
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task DeleteProduct(int id)
+        {
+            var product = await db.Product
+                //.Include(x => x.ProductCategory)
+                .FirstOrDefaultAsync(x => x.Id == id);
+            db.Product.Remove(product);
+            await db.SaveChangesAsync();
+            return;
+
+        }
+
         /// <summary>
         /// Dodaj kategoriju proizvoda
         /// </summary>
@@ -393,6 +460,31 @@ namespace PavlicWebShop.Services.Implementation
             var dbo = await db.ShoppingCartItem.ToListAsync();
             return dbo.Select(x => mapper.Map<ShoppingCartItemViewModel>(x)).ToList();
 
+        }
+
+        public List<int>? GetRandomNumberList(int start, int end)
+        {
+            if (start > end)
+            {
+                return null;
+            }
+
+            if (end == 0)
+            {
+                return null;
+            }
+            Random random = new Random();
+            List<int> list = new List<int>();
+            while (list.Count() < 6)
+            {
+                var randomNumber = random.Next(start, end);
+                var find = list.FirstOrDefault(x => x == randomNumber);
+                if (find != null)
+                {
+                    list.Add(randomNumber);
+                }
+            }
+            return list;
         }
     }
 }

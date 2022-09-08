@@ -1,4 +1,28 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using PavlicWebShop.Models.Binding
+@using PavlicWebShop.Models.Dbo
+@using PavlicWebShop.Services.Interface;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IUserService appUserManager
+
+@{
+    var myuser = await appUserManager.GetUser(User);
+    //var newUser = await appUserManager.CreateApiUserAsync(new ApiBasicDataUser
+    //        {
+    //            Email = "kresoTest@test.hr",
+    //            Password = "kresoTest@test.hr"
+
+    //        });
+
+
+    var user = await UserManager.GetUserAsync(User);
+
+
+
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,12 +43,38 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @if (user != null)
+                        {
+                            var userRoles = await UserManager.GetRolesAsync(user);
+                            
+                            @switch (userRoles[0])
+                            {
+                                case Roles.Admin:
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" href="@Url.Action("ProductsList", "Product")">Administracija proizvoda</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" href="@Url.Action("Users", "Admin")">Administracija korisnika</a>
+
+                                    </li>
+
+                                    break;
+                                case Roles.Employee:
+                                 <li class="nav-item">
+                                        <a class="nav-link text-dark" href="@Url.Action("ProductAdministration", "Admin")">Administracija proizvoda</a>
+
+                                    </li>
+                                    break;
+                                case Roles.BasicUser:
+                                  @*  <li class="nav-item">
+                                        <a class="nav-link text-dark" href="@Url.Action("ShoppingCart", "Home")">Košarica</a>
+
+                                    </li>*@
+                                    break;
+                            }
+                        }
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

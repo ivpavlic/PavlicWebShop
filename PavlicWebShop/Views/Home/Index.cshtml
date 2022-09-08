@@ -1,8 +1,27 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using PavlicWebShop.Models.ViewModel
+@model List<ProductViewModel>
+@{
+    int counter = 1;
 }
+<div class="row g-3">
+    @foreach (var product in Model.OrderBy(x => Guid.NewGuid()))
+    {
+        decimal price = product.Price * 1.25M;
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        @*  <div class="card-deck">*@
+
+
+        <div class="col-md-4 card">
+           
+                <img class="card-img" src="@product.ProductImgUrl" alt="Card image cap">
+                <div class="card-body">
+                    <div class="card-title"><h5>@product.Title</h5></div>
+                    <div class="card-text"><h5>@product.Description</h5></div>
+                    <div class="card-text"><h5>@price</h5></div>
+                </div>
+        </div>
+
+        @*</div>*@
+
+    }
 </div>

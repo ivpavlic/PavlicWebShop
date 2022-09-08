@@ -25,12 +25,18 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddControllersWithViews();
 
+builder.Services.AddControllersWithViews();
 
 builder.Services.Configure<AppConfig>(builder.Configuration);
 builder.Services.AddSingleton<IIdentityService, IdentityService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+
+builder.Services.AddScoped<IFileStorageService, FileStorageService>();
+//builder.Services.AddSingleton<Microsoft.Extensions.Hosting.IHostedService, QueueProcessor>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
 var app = builder.Build();
 
