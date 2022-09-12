@@ -73,6 +73,7 @@ namespace PavlicWebShop.Data
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<FileStorage> FileStorage { get; set; }
+        public DbSet<PavlicWebShop.Models.ViewModel.ApplicationUserViewModel>? ApplicationUserViewModel { get; set; }
 
     }
 }

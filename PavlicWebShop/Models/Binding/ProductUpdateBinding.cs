@@ -9,6 +9,5 @@ namespace PavlicWebShop.Models.Binding
         public ProductCategoryViewModel ProductCategory { get; set; }
         public int ProductCategoryId { get; set; }
 
-        public IFormFile ProductImg { get; set; }
     }
 }

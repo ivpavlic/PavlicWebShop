@@ -46,7 +46,7 @@
                         @if (user != null)
                         {
                             var userRoles = await UserManager.GetRolesAsync(user);
-                            
+
                             @switch (userRoles[0])
                             {
                                 case Roles.Admin:
@@ -61,16 +61,16 @@
 
                                     break;
                                 case Roles.Employee:
-                                 <li class="nav-item">
-                                        <a class="nav-link text-dark" href="@Url.Action("ProductAdministration", "Admin")">Administracija proizvoda</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" href="@Url.Action("ProductsList", "Product")">Administracija proizvoda</a>
 
                                     </li>
                                     break;
                                 case Roles.BasicUser:
-                                  @*  <li class="nav-item">
-                                        <a class="nav-link text-dark" href="@Url.Action("ShoppingCart", "Home")">Košarica</a>
+                                    @*  <li class="nav-item">
+                        <a class="nav-link text-dark" href="@Url.Action("ShoppingCart", "Home")">Košarica</a>
 
-                                    </li>*@
+                        </li>*@
                                     break;
                             }
                         }
@@ -92,6 +92,7 @@
             &copy; 2022 - PavlicWebShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

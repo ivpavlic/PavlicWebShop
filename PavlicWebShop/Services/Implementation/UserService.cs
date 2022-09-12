@@ -154,8 +154,8 @@ namespace PavlicWebShop.Services.Implementation
                 UserName = model.Email,
                 Firstname = model.Firstname,
                 Lastname = model.Lastname,
-                BirthDate = model.BirthDate
-
+                BirthDate = model.BirthDate,
+                EmailConfirmed = model.EmailConfirmed
             };
 
             var roles = await GetUserRoles();

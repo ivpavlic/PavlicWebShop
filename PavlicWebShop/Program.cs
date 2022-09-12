@@ -5,6 +5,7 @@ using PavlicWebShop.Models.Dbo;
 using PavlicWebShop.Models.Dto;
 using PavlicWebShop.Services.Implementation;
 using PavlicWebShop.Services.Interface;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+    //options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedEmail = true;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+    options.ClaimsIdentity.UserIdClaimType = JwtRegisteredClaimNames.Jti;
+})
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -32,7 +44,7 @@ builder.Services.Configure<AppConfig>(builder.Configuration);
 builder.Services.AddSingleton<IIdentityService, IdentityService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-
+builder.Services.AddScoped<IValidationService, ValidationService>();
 builder.Services.AddScoped<IFileStorageService, FileStorageService>();
 //builder.Services.AddSingleton<Microsoft.Extensions.Hosting.IHostedService, QueueProcessor>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

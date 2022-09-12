@@ -8,5 +8,6 @@ namespace PavlicWebShop.Models.Dbo
         public string Lastname { get; set; }
         public DateTime BirthDate { get; set; }
         public ICollection<Adress> Adress { get; set; }
+        public string? UserImgUrl { get; set; }
     }
 }

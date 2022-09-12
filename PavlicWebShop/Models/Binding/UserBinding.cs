@@ -1,4 +1,6 @@
-﻿namespace PavlicWebShop.Models.Binding
+﻿using PavlicWebShop.Validation;
+
+namespace PavlicWebShop.Models.Binding
 {
     public class UserBinding : UserBaseBinding
     {
@@ -13,16 +15,20 @@
         public string Lastname { get; set; }
         //Validirati DatumRodenja min 18g
         public DateTime BirthDate { get; set; }
-        //[UserEmailValidation]
+        [UserValidation]
         public string Email { get; set; }
         //[StringGreaterThanThanSeven]
         public string Password { get; set; }
-        public IFormFile UserPhoto { get; set; }
+        public IFormFile UserImg { get; set; }
+
     }
 
     public class UserAdminBinding : UserBaseBinding
     {
         public string RoleId { get; set; }
+
+        public bool EmailConfirmed { get; set; }
+
     }
 
     public class UserAdminUpdateBinding : UserAdminBinding

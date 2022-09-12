@@ -17,30 +17,6 @@ namespace PavlicWebShop.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SuspendOrder(int id)
-        {
-            var order = await productService.SuspendOrder(id);
-            return RedirectToAction("Orders");
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> Order(int id)
-        {
-            var order = await productService.GetOrder(id);
-            return View(order);
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> Orders()
-        {
-            var orders = await productService.GetOrders();
-            return View(orders);
-        }
-
-
-        [HttpGet]
         public async Task<IActionResult> ProductsList()
         {
             var products = await productService.GetProducts();

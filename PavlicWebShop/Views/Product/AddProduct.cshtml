@@ -32,12 +32,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
+                <input asp-for="Quantity" class="form-control" type='number' step='0.01'/>
+                <span asp-validation-for="Quantity" type='number' step='0.01' class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
+                <input asp-for="Price" class="form-control" type='number' step='0.01' />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
 
@@ -52,15 +52,28 @@
                 }
             </select>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(x=>x.ProductImgUrl)
-            <input type="file" name="ProductImg" class="form-control"/>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary mt-5" value="Create">
+          <div class="container col-md-6">
+            <div class="mb-5">
+                <label for="ProductImg" class="form-label">Bootstrap 5 image Upload with Preview</label>
+                <input class="form-control" type="file" id="formFile" name="ProductImg" onchange="preview()">
+                <button onclick="clearImage()" class="btn btn-primary mt-3">Click me</button>
+            </div>
+            <img id="frame" src="~/user.png" class="img-fluid" />
         </div>
 
+        <script>
+            function preview() {
+                frame.src = URL.createObjectURL(event.target.files[0]);
+            }
+            function clearImage() {
+                document.getElementById('formFile').value = null;
+                frame.src ="~/user.png";
+            }
+        </script>
+        <input type="submit" class="btn btn-primary mt-5" value="Create">
     </div>
+
+
     <div>
         <a asp-action="ProductsList">Back to List</a>
     </div>

@@ -5,6 +5,8 @@ using PavlicWebShop.Models;
 using PavlicWebShop.Models.Binding;
 using PavlicWebShop.Services.Implementation;
 using PavlicWebShop.Services.Interface;
+using Microsoft.AspNetCore.Identity;
+using PavlicWebShop.Models.Dbo;
 
 namespace PavlicWebShop.Controllers
 {
@@ -14,12 +16,14 @@ namespace PavlicWebShop.Controllers
         private readonly IProductService productService;
         private readonly IMapper mapper;
         private readonly IUserService userSevice;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
-        public AdminController(IProductService productService, IMapper mapper, IUserService userSevice)
+        public AdminController(IProductService productService, IMapper mapper, IUserService userSevice, SignInManager<ApplicationUser> signInManager)
         {
             this.mapper = mapper;
             this.productService = productService;
             this.userSevice = userSevice;
+            this.signInManager = signInManager;
         }
 
         [HttpGet]
@@ -29,11 +33,7 @@ namespace PavlicWebShop.Controllers
             return View(users);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> CreateNewUser()
-        {
-            return View();
-        }
+
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
@@ -64,6 +64,19 @@ namespace PavlicWebShop.Controllers
             return RedirectToAction("Users");
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> CreateNewUser(UserAdminBinding model)
+        //{
+        //    await userSevice.CreateUserAsync(model);
+        //    return RedirectToAction("Users");
+        //}
+
+        [HttpGet]
+        public async Task<IActionResult> CreateNewUser()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateNewUser(UserAdminBinding model)
         {
@@ -71,28 +84,8 @@ namespace PavlicWebShop.Controllers
             return RedirectToAction("Users");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> SuspendOrder(int id)
-        {
-            var order = await productService.SuspendOrder(id);
-            return RedirectToAction("Orders");
-        }
 
 
-        [HttpGet]
-        public async Task<IActionResult> Order(int id)
-        {
-            var order = await productService.GetOrder(id);
-            return View(order);
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> Orders()
-        {
-            var orders = await productService.GetOrders();
-            return View(orders);
-        }
 
 
         [HttpGet]
