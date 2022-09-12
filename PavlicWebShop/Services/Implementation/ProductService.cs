@@ -8,6 +8,7 @@ using PavlicWebShop.Models.Dbo;
 using PavlicWebShop.Models.Dto;
 using PavlicWebShop.Models.ViewModel;
 using PavlicWebShop.Services.Interface;
+using System.Globalization;
 
 namespace PavlicWebShop.Services.Implementation
 {
@@ -53,6 +54,9 @@ namespace PavlicWebShop.Services.Implementation
             {
                 return null;
             }
+
+            var price = decimal.Parse(model.Price.ToString(), CultureInfo.InvariantCulture);
+            dbo.Price = price;
             dbo.ProductCategory = productCategory;
             db.Product.Add(dbo);
             await db.SaveChangesAsync();
@@ -177,6 +181,9 @@ namespace PavlicWebShop.Services.Implementation
         {
             var category = await db.ProductCategory.FirstOrDefaultAsync(x => x.Id == model.ProductCategoryId);
             var dbo = await db.Product.FindAsync(model.Id);
+
+            decimal price= Convert.ToDecimal(dbo.Price.ToString());
+            dbo.Price = price;
             mapper.Map(model, dbo);
             dbo.ProductCategory = category;
             await db.SaveChangesAsync();

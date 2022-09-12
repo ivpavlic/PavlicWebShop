@@ -5,6 +5,11 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @inject IUserService appUserManager
+@inject IProductService productService
+
+@{
+    var productCategory = await productService.GetProductCategorys();
+}
 
 @{
     var myuser = await appUserManager.GetUser(User);
@@ -58,6 +63,21 @@
                                         <a class="nav-link text-dark" href="@Url.Action("Users", "Admin")">Administracija korisnika</a>
 
                                     </li>
+
+
+                                    <li class="dropdown">
+                                        <a class="nav-link text-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Product
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            @foreach (var category in productCategory)
+                                            {
+                                                <li><a class="dropdown-item" href="@Url.Action("ProductsList", "Product",new {id = category.Id})"><span>@category.Title</span></a></li>
+                                            }
+                                        </ul>
+
+                                    </li>
+
 
                                     break;
                                 case Roles.Employee:

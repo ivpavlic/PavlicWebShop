@@ -8,20 +8,31 @@
     {
         decimal price = product.Price * 1.25M;
 
-        @*  <div class="card-deck">*@
+        if (@product.ProductImgUrl != null)
+        {
+            <div class="col-md-4 card">
 
+            <img class="card-img" src="@product.ProductImgUrl" alt="Card image cap">
 
-        <div class="col-md-4 card">
-           
-                <img class="card-img" src="@product.ProductImgUrl" alt="Card image cap">
-                <div class="card-body">
-                    <div class="card-title"><h5>@product.Title</h5></div>
-                    <div class="card-text"><h5>@product.Description</h5></div>
-                    <div class="card-text"><h5>@price</h5></div>
-                </div>
-        </div>
+            <div class="card-body">
+                <div class="card-title"><h5>@product.Title</h5></div>
+                <div class="card-text"><h5>@product.Description</h5></div>
+                <div class="card-text"><h5>@price</h5></div>
+            </div>
+            </div>
+        }
+        else
+        {
+             <div class="col-md-4 card">
 
-        @*</div>*@
+            <img class="card-img" src="~/noimage.png" alt="Card image cap">
 
+            <div class="card-body">
+                <div class="card-title"><h5>@product.Title</h5></div>
+                <div class="card-text"><h5>@product.Description</h5></div>
+                <div class="card-text"><h5>@price</h5></div>
+            </div>
+            </div>
+        }
     }
 </div>
