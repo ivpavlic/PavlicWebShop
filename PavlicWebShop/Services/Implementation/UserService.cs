@@ -83,13 +83,11 @@ namespace PavlicWebShop.Services.Implementation
                 return null;
             }
 
-
             await DeleteAllUserRoles(dboUser);
             await userManager.AddToRoleAsync(dboUser, role.Name);
 
-            dboUser.Firstname = model.Firstname;
-            dboUser.Lastname = model.Lastname;
-            dboUser.BirthDate = model.BirthDate;
+            mapper.Map(model, dboUser);
+
             await db.SaveChangesAsync();
 
 
@@ -134,33 +132,33 @@ namespace PavlicWebShop.Services.Implementation
 
         public async Task DeleteUserAsync(string id)
         {
+            var adress = await db.Adress
+               //.Include(x => x.ProductCategory)
+               .FirstOrDefaultAsync(x => x.ApplicationUser.Id == id);
+            db.Adress.Remove(adress);
+
             var user = await db.Users.FindAsync(id);
             await userManager.DeleteAsync(user);
+
+            await db.SaveChangesAsync();
             return;
         }
 
 
-        public async Task<ApplicationUserViewModel?> CreateUserAsync(UserAdminBinding model)
+        public async Task<ApplicationUser?> CreateUserAsync(UserAdminBinding model)
         {
             var find = await userManager.FindByEmailAsync(model.Email);
             if (find != null)
             {
                 return null;
             }
-
-            var user = new ApplicationUser
-            {
-                Email = model.Email,
-                UserName = model.Email,
-                Firstname = model.Firstname,
-                Lastname = model.Lastname,
-                BirthDate = model.BirthDate,
-                EmailConfirmed = model.EmailConfirmed
-            };
+            var user = mapper.Map<ApplicationUser>(model);
 
             var roles = await GetUserRoles();
             var userRole = roles.FirstOrDefault(x => x.Id == model.RoleId);
 
+            var adress = mapper.Map<Adress>(model.UserAdress);
+            user.Adress = new List<Adress>() { adress };
             var createdUser = await userManager.CreateAsync(user, model.Password);
             if (createdUser.Succeeded)
             {
@@ -170,7 +168,8 @@ namespace PavlicWebShop.Services.Implementation
                     throw new Exception("Korisnik nije dodan u rolu!");
                 }
             }
-            return mapper.Map<ApplicationUserViewModel>(user);
+            return user;
+
         }
 
 

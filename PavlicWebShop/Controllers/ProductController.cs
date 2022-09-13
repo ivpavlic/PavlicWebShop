@@ -71,6 +71,20 @@ namespace PavlicWebShop.Controllers
             return View();
         }
 
+        //[HttpGet]
+        //public async Task<IActionResult> ProductsByCategory(int productCategoryId)
+        //{
+        //    var products = await productService.GetProductByCategory(productCategoryId);
+        //    return View(products);
+        //}
+
+        [HttpGet]
+        public async Task<IActionResult> ProductsByCategory(int id)
+        {
+            var products = await productService.GetProductByCategory(id);
+            return View(products);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddProductCategory(ProductCategoryBinding model)
         {

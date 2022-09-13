@@ -55,28 +55,27 @@
                             @switch (userRoles[0])
                             {
                                 case Roles.Admin:
-                                    <li class="nav-item">
+  @*                                  <li class="nav-item">
                                         <a class="nav-link text-dark" href="@Url.Action("ProductsList", "Product")">Administracija proizvoda</a>
 
-                                    </li>
+                                    </li>*@
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" href="@Url.Action("Users", "Admin")">Administracija korisnika</a>
+                                        <a class="nav-link text-dark" href="@Url.Action("Users", "Admin")">Users</a>
 
                                     </li>
-
-
                                     <li class="dropdown">
                                         <a class="nav-link text-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Product
+                                            Products Administration
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            @foreach (var category in productCategory)
-                                            {
-                                                <li><a class="dropdown-item" href="@Url.Action("ProductsList", "Product",new {id = category.Id})"><span>@category.Title</span></a></li>
-                                            }
+                                            <li><a class="dropdown-item" href="@Url.Action("ProductsList", "Product")"><span>Products List</span></a></li>
+                                            <li><a class="dropdown-item" href="@Url.Action("ProductCategorysList", "Product")"><span>Categorys List</span></a></li>
                                         </ul>
 
                                     </li>
+
+
+
 
 
                                     break;
@@ -94,6 +93,19 @@
                                     break;
                             }
                         }
+                        <li class="dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                Product
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                @foreach (var category in productCategory)
+                                {
+                                    <li><a class="dropdown-item" href="@Url.Action("ProductsByCategory", "Home",new {id = category.Id})"><span>@category.Title</span></a></li>
+                                    @*<li><a asp-action="ProductsByCategory" asp-route-id="@category.Id" class = "dropdown-item">@category.Title</a></li>*@
+                                }
+                            </ul>
+
+                        </li>
 
                     </ul>
                     <partial name="_LoginPartial" />

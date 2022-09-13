@@ -2,22 +2,17 @@
 @model List<ProductViewModel>
 @{
     int counter = 1;
-    var r = new Random();
-    var tenRandomProduct = Model.OrderBy(u => r.Next()).Take(10);
-
 }
 <div class="row g-3">
-
-    @foreach (var product in tenRandomProduct)
+    @foreach (var product in Model)
     {
 
         if (@product.ProductImgUrl != null)
         {
-            string path = @product.ProductImgUrl;
             <div class="col-md-4 card">
 
                 <div class="card-header">
-                    <img class="card-img" src="~/Vino/vinarija_kaptol_grasevina.png" alt="Card image cap">
+                    <img class="card-img" src="@product.ProductImgUrl" alt="Card image cap">
                 </div>
                 <div class="card-body">
                     <div class="card-title"><h5>@product.Title</h5></div>
@@ -33,7 +28,7 @@
         {
             <div class="col-md-4 card">
                 <div class="card-header">
-                    <img class="card-img" src="" alt="Card image cap">
+                    <img class="card-img" src="~/noimage.png" alt="Card image cap">
                 </div>
                 <div class="card-body">
                     <div class="card-title"><h5>@product.Title</h5></div>

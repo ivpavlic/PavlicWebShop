@@ -4,15 +4,17 @@ namespace PavlicWebShop.Models.Binding
 {
     public class UserBinding : UserBaseBinding
     {
-        public AdressBinding UserAdress { get; set; }
+        
     }
 
     public class UserBaseBinding
     {
+        public string RoleId { get; set; }
         //Validirati empty
         public string Firstname { get; set; }
         //Validirati empty
         public string Lastname { get; set; }
+        public AdressBinding UserAdress { get; set; }
         //Validirati DatumRodenja min 18g
         public DateTime BirthDate { get; set; }
         [UserValidation]
@@ -25,17 +27,12 @@ namespace PavlicWebShop.Models.Binding
 
     public class UserAdminBinding : UserBaseBinding
     {
-        public string RoleId { get; set; }
-
-        public bool EmailConfirmed { get; set; }
-
+        public bool IsEmailConfirmed { get; set; }
     }
 
     public class UserAdminUpdateBinding : UserAdminBinding
     {
         public string Id { get; set; }
     }
-
-
 
 }

@@ -76,6 +76,17 @@ namespace PavlicWebShop.Services.Implementation
             return mapper.Map<ProductViewModel>(dbo);
 
         }
+
+        public async Task<List<ProductViewModel>> GetProductByCategory(int productCategoryId)
+        {
+            var dbo = await db.Product.Where(x=>x.ProductCategory.Id == productCategoryId)
+               .Include(x => x.ProductCategory)
+               .ToListAsync();
+
+            return dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
+
+        }
+
         /// <summary>
         /// Dohvati sve proizvode
         /// </summary>
@@ -181,9 +192,6 @@ namespace PavlicWebShop.Services.Implementation
         {
             var category = await db.ProductCategory.FirstOrDefaultAsync(x => x.Id == model.ProductCategoryId);
             var dbo = await db.Product.FindAsync(model.Id);
-
-            decimal price= Convert.ToDecimal(dbo.Price.ToString());
-            dbo.Price = price;
             mapper.Map(model, dbo);
             dbo.ProductCategory = category;
             await db.SaveChangesAsync();

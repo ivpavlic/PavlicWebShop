@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PavlicWebShop.Data;
 
@@ -11,9 +12,10 @@ using PavlicWebShop.Data;
 namespace PavlicWebShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220913125858_seed")]
+    partial class seed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -345,7 +347,7 @@ namespace PavlicWebShop.Data.Migrations
                             Description = "Kvalitetno suho vino - Berba 2021.",
                             Price = 120m,
                             ProductCategoryId = 1,
-                            ProductImgUrl = "~/Vino/vinarija_kaptol_grasevina.png",
+                            ProductImgUrl = "",
                             Quantity = 20m,
                             Title = "Graševina"
                         },
@@ -356,7 +358,7 @@ namespace PavlicWebShop.Data.Migrations
                             Description = "Desertno suho vino - Berba 2020.",
                             Price = 180m,
                             ProductCategoryId = 1,
-                            ProductImgUrl = "~/Vino/krauthaker-muskat_zuti_1.png",
+                            ProductImgUrl = "",
                             Quantity = 50m,
                             Title = "Muškat zlatni"
                         },
@@ -399,7 +401,7 @@ namespace PavlicWebShop.Data.Migrations
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Domaći sok od aronije - 1l 2021.",
                             Price = 80m,
-                            ProductCategoryId = 2,
+                            ProductCategoryId = 3,
                             ProductImgUrl = "",
                             Quantity = 50m,
                             Title = "Sok aronija"

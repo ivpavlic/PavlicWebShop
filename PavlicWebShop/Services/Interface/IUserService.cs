@@ -14,7 +14,7 @@ namespace PavlicWebShop.Services.Interface
         Task<List<ApplicationUserViewModel>> GetUsers();
         Task<ApplicationUserViewModel> UpdateUser(UserAdminUpdateBinding model);
         Task DeleteUserAsync(string id);
-        Task<ApplicationUserViewModel?> CreateUserAsync(UserAdminBinding model);
+        Task<ApplicationUser?> CreateUserAsync(UserAdminBinding model);
         Task<ApplicationUser?> CreateUserAsync(UserBinding model, string role);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PavlicWebShop.Models;
 using PavlicWebShop.Models.Binding;
@@ -16,14 +17,16 @@ namespace PavlicWebShop.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserService userService;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly IMapper mapper;
         public HomeController(ILogger<HomeController> logger, IProductService productService, UserManager<ApplicationUser> userManager, 
-            IUserService userService, SignInManager<ApplicationUser> signInManager)
+            IUserService userService, SignInManager<ApplicationUser> signInManager, IMapper mapper)
         {
             this.productService = productService;
             this.userManager = userManager;
             this.userService = userService;
             this.signInManager = signInManager;
             _logger = logger;
+            this.mapper = mapper;
         }
 
 
@@ -44,6 +47,20 @@ namespace PavlicWebShop.Controllers
 
 
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ProductsByCategory(int id)
+        {
+            var products = await productService.GetProductByCategory(id);
+            return View(products);
+        }
+
+        public async Task<IActionResult> DetailsProduct(int id)
+        {
+            var product = await productService.GetProduct(id);
+            var model = mapper.Map<ProductUpdateBinding>(product);
+            return View(model);
         }
 
         public IActionResult Privacy()

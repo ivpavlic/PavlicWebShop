@@ -16,10 +16,9 @@ namespace PavlicWebShop.Models.Base
         [Column(TypeName = "decimal(9, 2)")]
         public decimal Quantity { get; set; }
 
-        [Required(ErrorMessage = "Required field!")]
-        //[DisplayFormat(DataFormatString = "{0.00}", ApplyFormatInEditMode = true)]
+       
         [Column(TypeName = "decimal(9, 2)")]
-        [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Required field!")]
         public decimal Price { get; set; }
 
         public string? ProductImgUrl { get; set; }

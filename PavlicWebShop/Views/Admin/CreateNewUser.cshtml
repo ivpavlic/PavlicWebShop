@@ -35,6 +35,19 @@
                 <span asp-validation-for="Lastname" class="text-danger"></span>
             </div>
             <div class="form-group">
+                @Html.LabelFor(x=>x.UserAdress.City, new {@class = "control-label"})
+                @Html.TextBoxFor(x=>x.UserAdress.City, new {@class = "form-control"})
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x=>x.UserAdress.Street, new {@class = "control-label"})
+                @Html.TextBoxFor(x=>x.UserAdress.Street, new {@class = "form-control"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x=>x.UserAdress.Country, new {@class = "control-label"})
+                @Html.TextBoxFor(x=>x.UserAdress.Country, new {@class = "form-control"})
+            </div>
+            <div class="form-group">
                 <label asp-for="BirthDate" class="control-label"></label>
                 <input type="date" asp-for="BirthDate" class="form-control" />
                 <span asp-validation-for="BirthDate" class="text-danger"></span>
@@ -50,9 +63,9 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
              <div class="form-group">
-                <label asp-for="EmailConfirmed" class="control-label">Active</label>
-                <input type="checkbox" asp-for="EmailConfirmed" checked="checked">
-                <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
+                <label asp-for="IsEmailConfirmed" class="control-label">Active</label>
+                <input type="checkbox" asp-for="IsEmailConfirmed" checked="checked">
+                <span asp-validation-for="IsEmailConfirmed" class="text-danger"></span>
             </div>
 
             <div class="form-group">
