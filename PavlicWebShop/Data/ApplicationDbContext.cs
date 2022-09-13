@@ -119,7 +119,7 @@ namespace PavlicWebShop.Data
                     ProductCategoryId = 2,
                     Quantity = 15,
                     Price = 60,
-                    ProductImgUrl = "",
+                    ProductImgUrl = "~/Sok/063-Sok-kupina-1-l-Sedic-copy.png",
                 },
                  new Product
                  {
@@ -129,7 +129,7 @@ namespace PavlicWebShop.Data
                      ProductCategoryId = 3,
                      Quantity = 20,
                      Price = 120,
-                     ProductImgUrl="",
+                     ProductImgUrl= "~/Med/BagremMed.png",
                  },
                 new Product
                 {
@@ -139,7 +139,7 @@ namespace PavlicWebShop.Data
                     ProductCategoryId = 3,
                     Quantity = 65,
                     Price = 75,
-                    ProductImgUrl = "",
+                    ProductImgUrl = "~/Med/medlipa.png",
                 },
                
                 new Product
@@ -150,7 +150,7 @@ namespace PavlicWebShop.Data
                     ProductCategoryId = 2,
                     Quantity = 50,
                     Price = 80,
-                    ProductImgUrl = "",
+                    ProductImgUrl = "~/Sok/Aronija.png",
                 });
 
         }
