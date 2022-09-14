@@ -32,7 +32,7 @@ namespace PavlicWebShop.Controllers
 
         public IActionResult Index()
         {
-            return View(productService.GetProductsRandom().Result);
+            return View(productService.GetProducts().Result);
         }
 
         [HttpPost]

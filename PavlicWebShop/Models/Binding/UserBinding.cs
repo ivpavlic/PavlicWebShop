@@ -1,4 +1,5 @@
 ﻿using PavlicWebShop.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace PavlicWebShop.Models.Binding
 {
@@ -9,17 +10,21 @@ namespace PavlicWebShop.Models.Binding
 
     public class UserBaseBinding
     {
+        [Display(Name = "Role")]
         public string RoleId { get; set; }
         //Validirati empty
+        [Display(Name = "First name")]
         public string Firstname { get; set; }
-        //Validirati empty
+
+        [Display(Name = "Last name")]
         public string Lastname { get; set; }
-        public AdressBinding UserAdress { get; set; }
-        //Validirati DatumRodenja min 18g
+
+        [Display(Name = "Birth date")]
         public DateTime BirthDate { get; set; }
+        public AdressBinding UserAdress { get; set; }
         [UserValidation]
         public string Email { get; set; }
-        //[StringGreaterThanThanSeven]
+        [StringGreaterThanThanSeven]
         public string Password { get; set; }
         public IFormFile UserImg { get; set; }
 
@@ -27,7 +32,8 @@ namespace PavlicWebShop.Models.Binding
 
     public class UserAdminBinding : UserBaseBinding
     {
-        public bool IsEmailConfirmed { get; set; }
+        public bool EmailConfirmed { get; set; }
+
     }
 
     public class UserAdminUpdateBinding : UserAdminBinding

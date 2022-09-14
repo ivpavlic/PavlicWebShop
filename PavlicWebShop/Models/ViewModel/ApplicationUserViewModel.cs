@@ -13,7 +13,7 @@ namespace PavlicWebShop.Models.ViewModel
         public string Email { get; set; }
 
         [Display(Name = "Active")]
-        public bool IsEmailConfirmed { get; set; }
+        public bool EmailConfirmed { get; set; }
 
     }
 }

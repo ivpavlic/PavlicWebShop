@@ -6,6 +6,20 @@
 
 <h1>Users</h1>
 
+<script>
+    function TrigerModal() {
+        console.log("modal aktiviran!");
+        $('#mojModal').modal('show');
+    }
+
+    function HideModal() {
+        $('#mojModal').modal('hide');
+    }
+
+</script>
+
+
+
 <p>
     <a class="btn btn-success" asp-action="CreateNewUser">Create New</a>
 </p>
@@ -25,36 +39,56 @@
                 @Html.DisplayNameFor(model => model.BirthDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsEmailConfirmed)
+                @Html.DisplayNameFor(model => model.EmailConfirmed)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Firstname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lastname)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.BirthDate.ToString("dd.mm.yyyy"))*@
-                @Convert.ToDateTime(item.BirthDate).ToString("dd.MM.yyyy")
-            </td>
-             <td>
-                @Html.DisplayFor(modelItem => item.IsEmailConfirmed)
-            </td>
-            <td>
-                <a asp-action="EditUser" asp-route-id="@item.Id" class = "btn btn-primary">Edit</a>
-                <a asp-action="DetailsUser" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
-                <a asp-action="DeleteUser" asp-route-id="@item.Id" class = "btn btn-danger">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.BirthDate.ToString("dd.mm.yyyy"))*@
+                    @Convert.ToDateTime(item.BirthDate).ToString("dd.MM.yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                </td>
+                <td>
+                    <a asp-action="EditUser" asp-route-id="@item.Id" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Edit</a>
+                    <a asp-action="DetailsUser" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
+                    <button type="button" class="btn btn-danger" onclick="TrigerModal()">Delete</button>
+                    <div class="modal" id="mojModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Confirm delete</h5>
+
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want delete this user?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    @Html.ActionLink("Delete", "DeleteUser", new {  id=@item.Id  },new {@class= "btn btn-danger"})
+                                    @*             <button type="button" class="btn btn-primary">Save changes</button>*@
+                                    <button type="button" class="btn btn-secondary" onclick="HideModal()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

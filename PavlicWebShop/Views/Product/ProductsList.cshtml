@@ -47,9 +47,39 @@
             <td>
                 <a asp-action="UpdateProduct" asp-route-id="@item.Id" class = "btn btn-primary">Edit</a>
                 <a asp-action="DetailsProduct" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
-                <a asp-action="DeleteProduct" asp-route-id="@item.Id" class = "btn btn-danger">Delete</a>
+              <button type="button" class="btn btn-danger" onclick="TrigerModal()">Delete</button>
+               <div class="modal" id="mojModal" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Confirm delete</h5>
+
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want delete this product?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    @Html.ActionLink("Delete", "DeleteProduct", new {  id=@item.Id  },new {@class= "btn btn-danger"})
+                                    @*             <button type="button" class="btn btn-primary">Save changes</button>*@
+                                    <button type="button" class="btn btn-secondary" onclick="HideModal()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<script>
+    function TrigerModal() {
+        console.log("modal aktiviran!");
+        $('#mojModal').modal('show');
+    }
+
+    function HideModal() {
+        $('#mojModal').modal('hide');
+    }
+
+</script>
+

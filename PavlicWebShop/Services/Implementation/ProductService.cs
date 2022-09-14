@@ -93,46 +93,13 @@ namespace PavlicWebShop.Services.Implementation
         /// <returns></returns>
         public async Task<List<ProductViewModel>> GetProducts()
         {
-            var dbo = await db.Product.ToListAsync();
-            return dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
-
-        }
-
-        /// <summary>
-        /// Dohvati sve proizvode
-        /// </summary>
-        /// <returns></returns>
-        public async Task<List<ProductViewModel>> GetProductsRandom()
-        {
             var dbo = await db.Product
-               .Include(x => x.ProductCategory)
-               .ToListAsync();
-
-            //var model = dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
-
-            //var randomByQuery = model.OrderBy(x => Guid.NewGuid()).ToList();
-
-            // var response = new List<ProductViewModel>();
-            //var randomList = webShopCommonSharedService.GetRandomNumberList(model.First().Id, model.Last().Id);
-
-            // foreach (var item in randomList)
-            // {
-            //     var find = model.FirstOrDefault(x => x.Id == item);
-            //     if(find != null)
-            //     {
-            //         response.Add(find);
-            //     }
-            // }
-
-
-            //return response;
-
-            //return dbo.Select(x => mapper.Map<ProductViewModel>(x)).OrderBy(x => Guid.NewGuid()).ToList();
-
+                .Include(x => x.ProductCategory)
+                .ToListAsync();
             return dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
 
-            //return dbo.Select(x => mapper.Map<ProductViewModel>(x)).OrderBy(x => Guid.NewGuid()).ToList();
         }
+
         /// <summary>
         /// Brisanje proizvoda
         /// </summary>
@@ -209,31 +176,6 @@ namespace PavlicWebShop.Services.Implementation
             mapper.Map(model, dbo);
             await db.SaveChangesAsync();
             return mapper.Map<ProductCategoryViewModel>(dbo);
-        }
-
-        public List<int>? GetRandomNumberList(int start, int end)
-        {
-            if (start > end)
-            {
-                return null;
-            }
-
-            if (end == 0)
-            {
-                return null;
-            }
-            Random random = new Random();
-            List<int> list = new List<int>();
-            while (list.Count() < 6)
-            {
-                var randomNumber = random.Next(start, end);
-                var find = list.FirstOrDefault(x => x == randomNumber);
-                if (find != null)
-                {
-                    list.Add(randomNumber);
-                }
-            }
-            return list;
         }
     }
 }
