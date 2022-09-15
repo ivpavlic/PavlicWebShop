@@ -33,101 +33,51 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PavlicWebShop</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/PavlicWebShop.styles.css" asp-append-version="true" />
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PavlicWebShop</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        @if (user != null)
-                        {
-                            var userRoles = await UserManager.GetRolesAsync(user);
+    <partial name="_Sidebar" />
+    <partial name="_Navbar" />
+    
+     <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+      
+    <!-- Content Header (Page header) -->
+ @*   <div class="content-header">
+      <div class="container-fluid">
 
-                            @switch (userRoles[0])
-                            {
-                                case Roles.Admin:
-  @*                                  <li class="nav-item">
-                                        <a class="nav-link text-dark" href="@Url.Action("ProductsList", "Product")">Administracija proizvoda</a>
+      </div><!-- /.container-fluid -->
+    </div>*@
+    <!-- /.content-header -->
 
-                                    </li>*@
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="@Url.Action("Users", "Admin")">Users</a>
-
-                                    </li>
-                                    <li class="dropdown">
-                                        <a class="nav-link text-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Products Administration
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a class="dropdown-item" href="@Url.Action("ProductsList", "Product")"><span>Products List</span></a></li>
-                                            <li><a class="dropdown-item" href="@Url.Action("ProductCategorysList", "Product")"><span>Categorys List</span></a></li>
-                                        </ul>
-
-                                    </li>
-
-
-
-
-
-                                    break;
-                                case Roles.Employee:
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="@Url.Action("ProductsList", "Product")">Administracija proizvoda</a>
-
-                                    </li>
-                                    break;
-                                case Roles.BasicUser:
-                                    @*  <li class="nav-item">
-                        <a class="nav-link text-dark" href="@Url.Action("ShoppingCart", "Home")">Košarica</a>
-
-                        </li>*@
-                                    break;
-                            }
-                        }
-                        <li class="dropdown">
-                            <a class="nav-link text-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Product
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                @foreach (var category in productCategory)
-                                {
-                                    <li><a class="dropdown-item" href="@Url.Action("ProductsByCategory", "Home",new {id = category.Id})"><span>@category.Title</span></a></li>
-                                    @*<li><a asp-action="ProductsByCategory" asp-route-id="@category.Id" class = "dropdown-item">@category.Title</a></li>*@
-                                }
-                            </ul>
-
-                        </li>
-
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - PavlicWebShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+          <p></p>
+        @RenderBody()
+          
         </div>
-    </footer>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <partial name="_Footer" />
+
+
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

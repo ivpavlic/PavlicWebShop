@@ -11,15 +11,20 @@ namespace PavlicWebShop.Mapping
         public MappingProfile()
         {
             CreateMap<IdentityRole, UserRolesViewModel>();
+
             CreateMap<ProductBinding, Product>();
             CreateMap<Product, ProductViewModel>();
-            CreateMap<ProductCategoryBinding, ProductCategory>();
-            CreateMap<ProductCategory, ProductCategoryViewModel>();
-            CreateMap<ProductCategoryUpdateBinding, ProductCategory>();
-            CreateMap<ApplicationUser, ApplicationUserViewModel>();
-
             CreateMap<ProductViewModel, ProductUpdateBinding>();
             CreateMap<ProductUpdateBinding, Product>();
+
+            CreateMap<ProductCategoryBinding, ProductCategory>();
+            CreateMap<ProductCategory, ProductCategoryViewModel>();
+            CreateMap<ProductCategoryViewModel, ProductCategoryUpdateBinding>();
+            CreateMap<ProductCategoryUpdateBinding, ProductCategory>();
+
+            CreateMap<ApplicationUser, ApplicationUserViewModel>();
+
+          
 
             CreateMap<AdressBinding, Adress>();
             CreateMap<Adress, AdressViewModel>();

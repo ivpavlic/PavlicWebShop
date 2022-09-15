@@ -6,44 +6,63 @@
     var tenRandomProduct = Model.OrderBy(u => r.Next()).Take(10);
 
 }
-<div class="row g-3">
+@*<style>
+    .card-img-top {
+    width: 100%;
+    height: 18vw;
+    object-fit: cover;
+}
+</style>*@
+<!-- Main content -->
+<section class="content">
 
-    @foreach (var product in tenRandomProduct)
-    {
+    <div class="row g-3">
 
-        if (@product.ProductImgUrl != null)
+        @foreach (var product in tenRandomProduct)
         {
-            string path = @product.ProductImgUrl;
-            <div class="col-md-4 card">
 
-                <div class="card-header">
-                    <img class="card-img" src=@Url.Content(product.ProductImgUrl) alt="Card image cap">
+            if (@product.ProductImgUrl != null)
+            {
+                string path = @product.ProductImgUrl;
+                <div class="col-sm-4 card">
+                    <div class="embed-responsive embed-responsive-4by3">
+                    <img src=@Url.Content(product.ProductImgUrl) class="card-img-top embed-responsive-item" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Title</h5>
+                        <p class="card-text">@product.Price kn</p>
+                        <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="card-title"><h5>@product.Title</h5></div>
-                    <div class="card-text"><h5>@product.Description</h5></div>
-                    <div class="card-text"><h5>@product.Price</h5></div>
+@*                <div class="col-md-4 card-secondary">
+
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                        <img class="card-img" src=@Url.Content(product.ProductImgUrl) alt="Card image cap">
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-title"><h5>@product.Title</h5></div>
+                        <div class="card-text"><h5>@product.Price</h5></div>
+                        <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">View</a>
+                    </div>
+                </div>*@
+            }
+            else
+            {
+                 <div class="col-sm-4 card">
+                    <div class="embed-responsive embed-responsive-4by3">
+                    <img src="~/noimage.png" class="card-img-top embed-responsive-item" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Title</h5>
+                        <p class="card-text">@product.Price Kn</p>
+                        <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">View</a>
-                </div>
-            </div>
+            }
         }
-        else
-        {
-            <div class="col-md-4 card">
-                <div class="card-header">
-                    <img class="card-img" src="" alt="Card image cap">
-                </div>
-                <div class="card-body">
-                    <div class="card-title"><h5>@product.Title</h5></div>
-                    <div class="card-text"><h5>@product.Description</h5></div>
-                    <div class="card-text"><h5>@product.Price</h5></div>
-                </div>
-                <div class="card-footer">
-                    <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">View</a>
-                </div>
-            </div>
-        }
-    }
-</div>
+    </div>
+
+</section>
+<!-- /.content -->

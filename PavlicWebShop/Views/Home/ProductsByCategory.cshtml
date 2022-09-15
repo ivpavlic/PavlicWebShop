@@ -9,36 +9,29 @@
 
         if (@product.ProductImgUrl != null)
         {
-            <div class="col-md-4 card">
-
-                <div class="card-header">
-                    <img class="card-img" src="@Url.Content(product.ProductImgUrl)" alt="Card image cap">
+             <div class="col-sm-4 card">
+                    <div class="embed-responsive embed-responsive-4by3">
+                    <img src=@Url.Content(product.ProductImgUrl) class="card-img-top embed-responsive-item" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Title</h5>
+                        <p class="card-text">@product.Price kn</p>
+                        <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="card-title"><h5>@product.Title</h5></div>
-                    <div class="card-text"><h5>@product.Description</h5></div>
-                    <div class="card-text"><h5>@product.Price</h5></div>
-                </div>
-                <div class="card-footer">
-                    <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">View</a>
-                </div>
-            </div>
         }
         else
         {
-            <div class="col-md-4 card">
-                <div class="card-header">
-                    <img class="card-img" src="~/noimage.png" alt="Card image cap">
+             <div class="col-sm-4 card">
+                    <div class="embed-responsive embed-responsive-4by3">
+                    <img src="~/noimage.png" class="card-img-top embed-responsive-item" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Title</h5>
+                        <p class="card-text">@product.Price kn</p>
+                        <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="card-title"><h5>@product.Title</h5></div>
-                    <div class="card-text"><h5>@product.Description</h5></div>
-                    <div class="card-text"><h5>@product.Price</h5></div>
-                </div>
-                <div class="card-footer">
-                    <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">View</a>
-                </div>
-            </div>
         }
     }
 </div>

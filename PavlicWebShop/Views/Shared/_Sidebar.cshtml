@@ -1,0 +1,162 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PavlicWebShop.Models.Binding
+@using PavlicWebShop.Models.Dbo
+@using PavlicWebShop.Services.Interface;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IUserService appUserManager
+@inject IProductService productService
+
+@{
+    var productCategory = await productService.GetProductCategorys();
+}
+
+@{
+    var myuser = await appUserManager.GetUser(User);
+    //var newUser = await appUserManager.CreateApiUserAsync(new ApiBasicDataUser
+    //        {
+    //            Email = "kresoTest@test.hr",
+    //            Password = "kresoTest@test.hr"
+
+    //        });
+
+
+    var user = await UserManager.GetUserAsync(User);
+
+
+
+}
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="~/Home/Index" class="brand-link">
+        <img src="~/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Pavlic OPG</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            @if (user != null)
+            {
+                <div class="image">
+                    <img src="~/user.png" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">@user.Firstname @user.Lastname</a>
+                </div>
+            }
+        </div>
+
+
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                <li class="nav-item menu">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Products
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            @foreach (var category in productCategory)
+                            {
+                                <a href="@Url.Action("ProductsByCategory", "Home",new {id = category.Id})" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>@category.Title</p>
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                </li>
+                @if (user != null)
+                {
+                    var userRoles = await UserManager.GetRolesAsync(user);
+
+                    @switch (userRoles[0])
+                    {
+                        case Roles.Admin:
+                            <li class="nav-item menu">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Products Administration
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ProductsList", "Product")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Products List</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ProductCategorysList", "Product")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Categorys List</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Users", "Admin")" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>Users</p>
+                                </a>
+                            </li>
+                            break;
+
+                        case Roles.Employee:
+                            <li class="nav-item menu">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Products Administration
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ProductsList", "Product")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Products List</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ProductCategorysList", "Product")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Categorys List</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            break;
+                    }
+                }
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

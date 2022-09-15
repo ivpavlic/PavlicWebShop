@@ -128,6 +128,7 @@ namespace PavlicWebShop.Services.Implementation
             await db.SaveChangesAsync();
             return mapper.Map<ProductCategoryViewModel>(dbo);
         }
+
         /// <summary>
         /// Dohvati kategoriju proivzvoda
         /// </summary>
@@ -135,8 +136,10 @@ namespace PavlicWebShop.Services.Implementation
         /// <returns></returns>
         public async Task<ProductCategoryViewModel> GetProductCategory(int id)
         {
-            var dbo = await db.ProductCategory.FindAsync(id);
+            var dbo = await db.ProductCategory
+               .FirstOrDefaultAsync(x => x.Id == id);
             return mapper.Map<ProductCategoryViewModel>(dbo);
+
 
         }
         /// <summary>

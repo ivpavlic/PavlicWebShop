@@ -56,6 +56,7 @@ namespace PavlicWebShop.Controllers
         {
             await productService.AddProduct(model);
             return RedirectToAction("ProductsList");
+
         }
 
         [HttpGet]
@@ -105,6 +106,7 @@ namespace PavlicWebShop.Controllers
             var productCategorys = await productService.GetProductCategory(id);
             var model = mapper.Map<ProductCategoryUpdateBinding>(productCategorys);
             return View(model);
+
         }
 
         [HttpPost]
