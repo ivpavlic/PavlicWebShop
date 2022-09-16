@@ -48,10 +48,10 @@
 
         <div class="card col-md-6">
             <div class="col-md-6">
-                <img id="frame" src="~/noimage.png" class="img-thumbnail" />
+                <img id="frame" src="@Model.ProductImgUrl" class="img-thumbnail" />
                 <p></p>
                 <div class="col-md-12 form-group">
-                    <input class="form-control" type="file" id="formFile" name="ProductImgUrl" onchange="preview()">
+                    <input class="form-control" type="file" id="formFile" value="@Model.ProductImgUrl" name="ProductImgUrl" onchange="preview()">
                     @*<button onclick="clearImage()" class="btn btn-primary mt-3">Click me</button>*@
                 </div>
             </div>

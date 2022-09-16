@@ -23,8 +23,9 @@ namespace PavlicWebShop.Mapping
             CreateMap<ProductCategoryUpdateBinding, ProductCategory>();
 
             CreateMap<ApplicationUser, ApplicationUserViewModel>();
+            CreateMap<ApplicationUserViewModel, UserAdminUpdateBinding>();
+            CreateMap<UserAdminUpdateBinding, ApplicationUser>();
 
-          
 
             CreateMap<AdressBinding, Adress>();
             CreateMap<Adress, AdressViewModel>();

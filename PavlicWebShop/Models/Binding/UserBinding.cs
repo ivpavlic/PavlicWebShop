@@ -1,11 +1,12 @@
-﻿using PavlicWebShop.Validation;
+﻿using PavlicWebShop.Models.ViewModel;
+using PavlicWebShop.Validation;
 using System.ComponentModel.DataAnnotations;
 
 namespace PavlicWebShop.Models.Binding
 {
     public class UserBinding : UserBaseBinding
     {
-        
+
     }
 
     public class UserBaseBinding
@@ -33,12 +34,19 @@ namespace PavlicWebShop.Models.Binding
     public class UserAdminBinding : UserBaseBinding
     {
         public bool EmailConfirmed { get; set; }
+        public AdressViewModel UserAdress { get; set; }
+        public string City { get; set; }
+        public string Street { get; set; }
+        public string Country { get; set; }
+        public string RoleId { get; set; }
 
     }
 
     public class UserAdminUpdateBinding : UserAdminBinding
     {
         public string Id { get; set; }
+        
+
     }
 
 }
