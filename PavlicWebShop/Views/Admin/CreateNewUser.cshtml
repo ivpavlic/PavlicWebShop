@@ -8,72 +8,116 @@
 
 <h1>CreateNewUser</h1>
 
-<h4>UserAdminBinding</h4>
+
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateNewUser">
-            <label asp-for="RoleId" class="control-label"></label>
-            <div class="form-group">
-                <select name="RoleId" class="form-control">
-                    @foreach (var item in userRoles)
-                    {
-                        <option value="@item.Id">
-                            @item.Name
-                        </option>
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Firstname" class="control-label"></label>
-                <input asp-for="Firstname" class="form-control" />
-                <span asp-validation-for="Firstname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Lastname" class="control-label"></label>
-                <input asp-for="Lastname" class="form-control" />
-                <span asp-validation-for="Lastname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(x=>x.UserAdress.City, new {@class = "control-label"})
-                @Html.TextBoxFor(x=>x.UserAdress.City, new {@class = "form-control"})
+<form asp-action="CreateNewUser">
+    <div class="card">
+        <div class="card-header p-0">
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-4">
+                    <div class="form-group">
+                        <select name="RoleId" class="form-control">
+                            @foreach (var item in userRoles)
+                            {
+                                <option value="@item.Id">
+                                    @item.Name
+                                </option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="Firstname" class="control-label"></label>
+                        <input asp-for="Firstname" class="form-control" />
+                        <span asp-validation-for="Firstname" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="Lastname" class="control-label"></label>
+                        <input asp-for="Lastname" class="form-control" />
+                        <span asp-validation-for="Lastname" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="BirthDate" class="control-label"></label>
+                        <input type="date" asp-for="BirthDate" class="form-control" />
+                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="form-group">
+                        <label class="control-label"></label>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="form-group">
+                        @Html.LabelFor(x=>x.UserAdress.City, new {@class = "control-label"})
+                        @Html.TextBoxFor(x=>x.UserAdress.City, new {@class = "form-control"})
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        @Html.LabelFor(x=>x.UserAdress.Street, new {@class = "control-label"})
+                        @Html.TextBoxFor(x=>x.UserAdress.Street, new {@class = "form-control"})
+                    </div>
+                </div>
+                <div class="col-4">
+                    @Html.LabelFor(x=>x.UserAdress.Country, new {@class = "control-label"})
+                    @Html.TextBoxFor(x=>x.UserAdress.Country, new {@class = "form-control"})
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input type="email" asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="form-group">
+                        <label class="control-label"></label>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input type="password" asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="form-group">
+                        <label class="control-label"></label>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="form-group">
+                        <label asp-for="EmailConfirmed" class="control-label">Active</label>
+                        <input type="checkbox" asp-for="EmailConfirmed" checked="checked">
+                        <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Submit"><a></a>
+                        <a asp-action="Index" class="btn btn-danger">Cancel</a>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(x=>x.UserAdress.Street, new {@class = "control-label"})
-                @Html.TextBoxFor(x=>x.UserAdress.Street, new {@class = "form-control"})
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(x=>x.UserAdress.Country, new {@class = "control-label"})
-                @Html.TextBoxFor(x=>x.UserAdress.Country, new {@class = "form-control"})
-            </div>
-            <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input type="date" asp-for="BirthDate" class="form-control" />
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input type="email" asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input type="password" asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-             <div class="form-group">
-                <label asp-for="EmailConfirmed" class="control-label">Active</label>
-                <input type="checkbox" asp-for="EmailConfirmed" checked="checked">
-                <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+        <!-- /.card-body -->
     </div>
-</div>
+</form>
+
 
 <div>
     <a asp-action="Index">Back to List</a>

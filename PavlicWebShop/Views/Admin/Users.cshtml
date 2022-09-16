@@ -65,7 +65,7 @@
                     @Html.DisplayFor(modelItem => item.EmailConfirmed)
                 </td>
                 <td>
-                    <a asp-action="EditUser" asp-route-id="@item.Id" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Edit</a>
+                    <a asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
                     <a asp-action="DetailsUser" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
                     <button type="button" class="btn btn-danger" onclick="TrigerModal()">Delete</button>
                     <div class="modal" id="mojModal" tabindex="-1" role="dialog">

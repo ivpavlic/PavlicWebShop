@@ -1,10 +1,8 @@
 ﻿@using PavlicWebShop.Models.ViewModel
 @model List<ProductViewModel>
 @{
-    int counter = 1;
     var r = new Random();
     var tenRandomProduct = Model.OrderBy(u => r.Next()).Take(10);
-
 }
 @*<style>
     .card-img-top {
@@ -13,10 +11,8 @@
     object-fit: cover;
 }
 </style>*@
-<!-- Main content -->
-<section class="content">
 
-    <div class="row g-3">
+    <section class="row g-3">
 
         @foreach (var product in tenRandomProduct)
         {
@@ -24,9 +20,9 @@
             if (@product.ProductImgUrl != null)
             {
                 string path = @product.ProductImgUrl;
-                <div class="col-sm-4 card">
-                    <div class="embed-responsive embed-responsive-4by3">
-                    <img src=@Url.Content(product.ProductImgUrl) class="card-img-top embed-responsive-item" alt="...">
+                <div class="col-md-3 card">
+                    <div class="embed-responsive embed-responsive-1by1">
+                        <img src=@Url.Content(product.ProductImgUrl) class="card-img-top embed-responsive-item" alt="...">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">@product.Title</h5>
@@ -34,25 +30,13 @@
                         <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
                     </div>
                 </div>
-@*                <div class="col-md-4 card-secondary">
 
-                    <div class="card-header">
-                    </div>
-                    <div class="card-body">
-                        <img class="card-img" src=@Url.Content(product.ProductImgUrl) alt="Card image cap">
-                    </div>
-                    <div class="card-footer">
-                        <div class="card-title"><h5>@product.Title</h5></div>
-                        <div class="card-text"><h5>@product.Price</h5></div>
-                        <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">View</a>
-                    </div>
-                </div>*@
             }
             else
             {
-                 <div class="col-sm-4 card">
-                    <div class="embed-responsive embed-responsive-4by3">
-                    <img src="~/noimage.png" class="card-img-top embed-responsive-item" alt="...">
+                <div class="col-md-3 card">
+                    <div class="embed-responsive embed-responsive-1by1">
+                <img src="~/noimage.png" class="card-img-top embed-responsive-item" alt="...">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">@product.Title</h5>
@@ -62,7 +46,5 @@
                 </div>
             }
         }
-    </div>
-
-</section>
+    </section>
 <!-- /.content -->
