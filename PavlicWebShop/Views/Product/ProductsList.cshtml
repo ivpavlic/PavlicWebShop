@@ -6,9 +6,6 @@
 
 <h1>ProductsList</h1>
 
-@*<p>
-    <a asp-action="AddProduct">Create New</a>
-</p>*@
 <a class="btn btn-primary" href="@Url.Action("AddProduct", "Product")">Dodaj novi proizvod</a>
 <a class="btn btn-primary" href="@Url.Action("ProductCategorysList", "Product")">Dodaj novu kategoriju</a>
 <table id="example2" class="table table-bordered table-hover">
@@ -30,72 +27,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="UpdateProduct" asp-route-id="@item.Id" class = "btn btn-primary">Edit</a>
-                <a asp-action="DetailsProduct" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
-              <button type="button" class="btn btn-danger" onclick="TrigerModal()">Delete</button>
-               <div class="modal" id="mojModal" tabindex="1"  role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Confirm delete</h5>
-
-                                </div>
-                                <div class="modal-body">
-                                    <p>Are you sure you want delete this product?</p>
-                                </div>
-                                <div class="modal-footer">
-                                    @Html.ActionLink("Delete", "DeleteProduct", new {  id=@item.Id  },new {@class= "btn btn-danger"})
-                                    @*             <button type="button" class="btn btn-primary">Save changes</button>*@
-                                    <button type="button" class="btn btn-secondary" onclick="HideModal()">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="UpdateProduct" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                    <a asp-action="DetailsProduct" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
+                    <a asp-action="DeleteProduct" asp-route-id="@item.Id" type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want delete this product?')">Delete</a>
+                    <a data-target="#DeleteModal-@item.Id" data-toggle="modal" class="text-danger">Delete</a>
+                </td>
+            </tr>
+            }
     </tbody>
 </table>
-<script>
-    function TrigerModal() {
-        console.log("modal aktiviran!");
-        $('#mojModal').modal('show');
-    }
 
-    function HideModal() {
-        $('#mojModal').modal('hide');
-    }
 
-    $(function () {
-    $("#example2").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
 
-</script>
 

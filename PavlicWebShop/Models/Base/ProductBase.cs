@@ -12,15 +12,14 @@ namespace PavlicWebShop.Models.Base
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Required field!")]
-        //[DisplayFormat(DataFormatString = "{0.00}", ApplyFormatInEditMode = true)]
-        [Column(TypeName = "decimal(9, 2)")]
-        public decimal Quantity { get; set; }
+        public int Quantity { get; set; }
 
        
         [Column(TypeName = "decimal(9, 2)")]
         [Required(ErrorMessage = "Required field!")]
         public decimal Price { get; set; }
 
-        public string? ProductImgUrl { get; set; }
+        [Required(ErrorMessage = "Required field!")]
+        public string ProductImgUrl { get; set; }
     }
 }

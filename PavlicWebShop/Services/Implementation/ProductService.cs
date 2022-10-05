@@ -5,7 +5,6 @@ using PavlicWebShop.Data;
 using PavlicWebShop.Models;
 using PavlicWebShop.Models.Binding;
 using PavlicWebShop.Models.Dbo;
-using PavlicWebShop.Models.Dto;
 using PavlicWebShop.Models.ViewModel;
 using PavlicWebShop.Services.Interface;
 using System.Globalization;
@@ -16,13 +15,11 @@ namespace PavlicWebShop.Services.Implementation
     {
         private readonly ApplicationDbContext db;
         private readonly IMapper mapper;
-        private readonly AppConfig appConfig;
         private readonly IFileStorageService fileStorageService;
 
         public ProductService(ApplicationDbContext db,
-           IMapper mapper, IOptions<AppConfig> appConfig,IFileStorageService fileStorageService)
+           IMapper mapper,IFileStorageService fileStorageService)
         {
-            this.appConfig = appConfig.Value;
             this.db = db;
             this.mapper = mapper;
             this.fileStorageService = fileStorageService;
@@ -162,6 +159,10 @@ namespace PavlicWebShop.Services.Implementation
         {
             var category = await db.ProductCategory.FirstOrDefaultAsync(x => x.Id == model.ProductCategoryId);
             var dbo = await db.Product.FindAsync(model.Id);
+            if(model.ProductImgUrl==null)
+            {
+                model.ProductImgUrl = dbo.ProductImgUrl;
+            }
             mapper.Map(model, dbo);
             dbo.ProductCategory = category;
             await db.SaveChangesAsync();

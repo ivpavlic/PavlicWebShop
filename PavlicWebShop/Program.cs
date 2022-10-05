@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PavlicWebShop.Data;
 using PavlicWebShop.Models.Dbo;
-using PavlicWebShop.Models.Dto;
 using PavlicWebShop.Services.Implementation;
 using PavlicWebShop.Services.Interface;
 using System.IdentityModel.Tokens.Jwt;
@@ -39,7 +38,6 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.Configure<AppConfig>(builder.Configuration);
 builder.Services.AddSingleton<IIdentityService, IdentityService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();

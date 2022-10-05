@@ -20,6 +20,7 @@
 
                 <div class="col-4">
                     <div class="form-group">
+                        <label asp-for="RoleId" class="control-label">Role</label>
                         <select name="RoleId" class="form-control">
                             @foreach (var item in userRoles)
                             {
@@ -107,7 +108,7 @@
                 <div class="col-12">
                     <div class="form-group">
                         <input type="submit" class="btn btn-success" value="Submit"><a></a>
-                        <a asp-action="Index" class="btn btn-danger">Cancel</a>
+                        <a asp-action="Users" class="btn btn-danger">Cancel</a>
                     </div>
                 </div>
 
@@ -118,10 +119,6 @@
     </div>
 </form>
 
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{

@@ -32,8 +32,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" type='number' step='0,00' class="text-danger"></span>
+                <input type="number" asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" type='number' class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
@@ -56,8 +56,8 @@
                 <p></p>
             </div>
             <div class="container col-md-12">
-                <input class="form-control" type="file" id="formFile" name="ProductImg" onchange="preview()">
-                @*<button onclick="clearImage()" class="btn btn-primary mt-3">Click me</button>*@
+                <input class="form-control" required type="file" name="ProductImg" onchange="preview()">
+                <span asp-validation-for="ProductImg" class="text-danger"></span>
             </div>
 
             <div class="container col-md-12">

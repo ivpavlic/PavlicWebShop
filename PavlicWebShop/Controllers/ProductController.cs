@@ -42,6 +42,7 @@ namespace PavlicWebShop.Controllers
         public async Task<IActionResult> UpdateProduct(ProductUpdateBinding model)
         {
             var product = await productService.UpdateProduct(model);
+
             return RedirectToAction("ProductsList");
         }
 
@@ -59,14 +60,14 @@ namespace PavlicWebShop.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             await productService.DeleteProduct(id);
             return RedirectToAction("ProductsList");
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> AddProductCategory()
         {
             return View();

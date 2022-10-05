@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using PavlicWebShop.Data;
 using PavlicWebShop.Models.Dbo;
-using PavlicWebShop.Models.Dto;
 using PavlicWebShop.Models.ViewModel;
 using PavlicWebShop.Services.Interface;
 using System.Net.Mime;
@@ -13,16 +12,14 @@ namespace PavlicWebShop.Services.Implementation
     public class FileStorageService : IFileStorageService
     {
         private readonly ApplicationDbContext db;
-        private readonly AppConfig appConfig;
         private IWebHostEnvironment env;
         private IHttpContextAccessor httpContextAccessor;
         private readonly IMapper mapper;
 
         public FileStorageService(ApplicationDbContext db,
-            IOptions<AppConfig> appConfig, IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor, IMapper mapper)
+            IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor, IMapper mapper)
         {
             this.db = db;
-            this.appConfig = appConfig.Value;
             this.env = env;
             this.httpContextAccessor = httpContextAccessor;
             this.mapper = mapper;

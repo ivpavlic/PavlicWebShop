@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 using PavlicWebShop.Data;
 using PavlicWebShop.Models.Binding;
 using PavlicWebShop.Models.Dbo;
-using PavlicWebShop.Models.Dto;
 using PavlicWebShop.Models.ViewModel;
 using PavlicWebShop.Services.Interface;
 using System.Security.Claims;
@@ -19,17 +18,15 @@ namespace PavlicWebShop.Services.Implementation
         private readonly IMapper mapper;
         private SignInManager<ApplicationUser> signInManager;
         private readonly ApplicationDbContext db;
-        private readonly AppConfig appSettings;
 
         public UserService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper,
-            SignInManager<ApplicationUser> signInManager, ApplicationDbContext db, IOptions<AppConfig> appSettings)
+            SignInManager<ApplicationUser> signInManager, ApplicationDbContext db)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.mapper = mapper;
             this.signInManager = signInManager;
             this.db = db;
-            this.appSettings = appSettings.Value;
         }
 
         public async Task<List<UserRolesViewModel>> GetUserRoles()
