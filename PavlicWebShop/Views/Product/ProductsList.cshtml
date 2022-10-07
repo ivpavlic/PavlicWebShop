@@ -4,11 +4,12 @@
     ViewData["Title"] = "ProductsList";
 }
 
-<h1>ProductsList</h1>
 
-<a class="btn btn-primary" href="@Url.Action("AddProduct", "Product")">Dodaj novi proizvod</a>
-<a class="btn btn-primary" href="@Url.Action("ProductCategorysList", "Product")">Dodaj novu kategoriju</a>
-<table id="example2" class="table table-bordered table-hover">
+<h1>Products</h1>
+
+<a class="btn btn-success" href="@Url.Action("AddProduct", "Product")">New product</a>
+<p></p>
+<table id="dtProduct" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>
@@ -29,7 +30,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr id="row_@item.Id">
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
@@ -43,15 +44,86 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    <a asp-action="UpdateProduct" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
-                    <a asp-action="DetailsProduct" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
-                    <a asp-action="DeleteProduct" asp-route-id="@item.Id" type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want delete this product?')">Delete</a>
-                    <a data-target="#DeleteModal-@item.Id" data-toggle="modal" class="text-danger">Delete</a>
+                    <a asp-action="UpdateProduct" asp-route-id="@item.Id" class="btn btn-primary btn-sm" style='margin-left:5px'><i class='fa fa-edit'></i> Edit</a>
+                    <a asp-action="DetailsProduct" asp-route-id="@item.Id" class="btn btn-secondary btn-sm">Details</a>
+                    <a href="javascript:void(0)" id="@item.Id" class="btn btn-danger btn-sm delete-prompt" style='margin-left:5px'><i class='fa fa-trash'></i> Delete</a>
                 </td>
             </tr>
             }
     </tbody>
 </table>
+
+
+<div class="modal fade" id="delete-conformation" tabindex="-1" role="dialog" aria-labelledby="deleteconformation">
+    <div class="modal-dialog" style="width:501px !important;margin:0 auto;">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#d9534f;color:white;">
+                <h4 class="modal-title" id="delete-conformation">
+                    Delete Confirmation
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span>
+                                Are you sure you want to delete?
+                            </span>
+                            <strong id="deletedValueName">
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger delete-confirm">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+ 
+    <script>
+        $(document).ready(function() {
+            $('#dtProduct').DataTable({
+                "scrollCollapse": true,
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            //start of the document ready function
+            //delcaring global variable to hold primary key value.
+            var pryEmpId;
+            $('.delete-prompt').click(function() {
+                pryEmpId = $(this).attr('id');
+                $('#delete-conformation').modal('show');
+            });
+
+            $('.delete-confirm').click(function() {
+                if (pryEmpId != '') {
+                    $.ajax({
+                        url: '/Product/DeleteProduct',
+                        data: { 'id': pryEmpId },
+                        type: 'POST',
+                        success: function(result) {
+                            $("#delete-conformation").modal('hide');
+                            $("#row_" + pryEmpId).remove();
+                        },
+                        error: function() {
+                            $("#delete-conformation").modal('hide');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
 
 
 

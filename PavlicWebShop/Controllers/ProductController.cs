@@ -67,7 +67,7 @@ namespace PavlicWebShop.Controllers
             return RedirectToAction("ProductsList");
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> AddProductCategory()
         {
             return View();
@@ -91,7 +91,7 @@ namespace PavlicWebShop.Controllers
         public async Task<IActionResult> AddProductCategory(ProductCategoryBinding model)
         {
             await productService.AddProductCategory(model);
-            return RedirectToAction("ProductCategorysList");
+            return RedirectToAction("ProductCategoryList");
         }
 
         [HttpGet]

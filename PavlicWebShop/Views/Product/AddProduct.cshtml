@@ -42,32 +42,33 @@
                 <p></p>
             </div>
 
-             <div class="col-12">
+            <div class="col-12">
                 <input type="submit" class="btn btn-success" value="Submit"><a></a>
                 <a asp-action="ProductsList" class="btn btn-danger">Cancel</a>
             </div>
 
         </div>
-        
+
 
         <div class="card col-md-6">
-            <div class="container col-md-6">
-                <img id="frame" src="~/noimage.png" class="img-thumbnail"  />
+            <div class="col-md-6">
+                <img id="frame" src="~/noimage.png" class="img-thumbnail" />
                 <p></p>
-            </div>
-            <div class="container col-md-12">
-                <input class="form-control" required type="file" name="ProductImg" onchange="preview()">
-                <span asp-validation-for="ProductImg" class="text-danger"></span>
+                <div class="col-md-12 form-group">
+                    <input class="form-control" required type="file" name="ProductImg" onchange="preview()">
+                    <span asp-validation-for="ProductImg" class="text-danger"></span>
+                </div>
             </div>
 
-            <div class="container col-md-12">
+            <div class="form-group">
                 <label asp-for="ProductCategoryId" class="control-label">Odabei kategoriju</label>
-                <select name="ProductCategoryId" class="form-select" aria-label="Default select example">
+                <select name="ProductCategoryId" class="form-control">
                     @foreach (var item in productCategory)
                     {
                         <option value="@item.Id">@item.Title</option>
                     }
                 </select>
+                <span asp-validation-for="ProductCategoryId" class="text-danger"></span>
             </div>
             <script>
                 function preview() {
@@ -81,7 +82,6 @@
         </div>
 
         <div>
-            
         </div>
     </div>
 </form>

@@ -6,24 +6,13 @@
 
 <h1>Users</h1>
 
-<script>
-    function TrigerModal() {
-        console.log("modal aktiviran!");
-        $('#mojModal').modal('show');
-    }
-
-    function HideModal() {
-        $('#mojModal').modal('hide');
-    }
-
-</script>
-
 
 
 <p>
     <a class="btn btn-success" asp-action="CreateNewUser">Create New</a>
 </p>
-<table class="table">
+<table id="dtUser" class="table table-striped table-bordered table-sm" cellspacing="0"
+       width="100%">
     <thead>
         <tr>
             <th>
@@ -47,7 +36,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr id="row_@item.Id">
                 <td>
                     @Html.DisplayFor(modelItem => item.Role)
                 </td>
@@ -65,30 +54,81 @@
                     @Html.DisplayFor(modelItem => item.EmailConfirmed)
                 </td>
                 <td>
-                    <a asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
-                    <a asp-action="DetailsUser" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
-                    <button type="button" class="btn btn-danger" onclick="TrigerModal()">Delete</button>
-                    <div class="modal" id="mojModal" tabindex="-1" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Confirm delete</h5>
-
-                                </div>
-                                <div class="modal-body">
-                                    <p>Are you sure you want delete this user?</p>
-                                </div>
-                                <div class="modal-footer">
-                                    @Html.ActionLink("Delete", "DeleteUser", new {  id=@item.Id  },new {@class= "btn btn-danger"})
-                                    @*             <button type="button" class="btn btn-primary">Save changes</button>*@
-                                    <button type="button" class="btn btn-secondary" onclick="HideModal()">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <a asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-primary btn-sm"style='margin-left:5px'><i class='fa fa-edit'></i> Edit</a>
+                    <a asp-action="UserDetails" asp-route-id="@item.Id" class="btn btn-secondary btn-sm">Details</a>
+                    <a href="javascript:void(0)" id="@item.Id" class="btn btn-danger btn-sm delete-prompt" style='margin-left:5px'><i class='fa fa-trash'></i> Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<div class="modal fade" id="delete-conformation" tabindex="-1" role="dialog" aria-labelledby="deleteconformation">
+    <div class="modal-dialog" style="width:501px !important;margin:0 auto;">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#d9534f;color:white;">
+                <h4 class="modal-title" id="delete-conformation">
+                    Delete Confirmation
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span>
+                                Are you sure you want to delete?
+                            </span>
+                            <strong id="deletedValueName">
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger delete-confirm">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function() {
+            $('#dtUser').DataTable({
+                "scrollCollapse": true,
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            //start of the document ready function
+            //delcaring global variable to hold primary key value.
+            var pryEmpId;
+            $('.delete-prompt').click(function() {
+                pryEmpId = $(this).attr('id');
+                $('#delete-conformation').modal('show');
+            });
+
+            $('.delete-confirm').click(function() {
+                if (pryEmpId != '') {
+                    $.ajax({
+                        url: '/Admin/DeleteUser',
+                        data: { 'id': pryEmpId },
+                        type: 'POST',
+                        success: function(result) {
+                            $("#delete-conformation").modal('hide');
+                            $("#row_" + pryEmpId).remove();
+                        },
+                        error: function() {
+                            $("#delete-conformation").modal('hide');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

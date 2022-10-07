@@ -57,7 +57,7 @@ namespace PavlicWebShop.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {
             await userSevice.DeleteUserAsync(id);

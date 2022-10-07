@@ -1,0 +1,67 @@
+﻿@model PavlicWebShop.Models.ViewModel.ApplicationUserViewModel
+
+@{
+    ViewData["Title"] = "UserDetails";
+}
+
+<h2>User Details - <b>@Html.DisplayFor(model => model.Firstname) @Html.DisplayFor(model => model.Lastname)</b></h2>
+
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-2">
+            <h5><b>@Html.DisplayNameFor(model => model.Role)</b></h5>
+            <div class="d-flex flex-wrap">
+                <h6>@Html.DisplayFor(model => model.Role)</h6>
+            </div>
+        </div>
+        <div class="col-10">
+        </div>
+        <p></p>
+        <div class="col-12">
+            <h5><b>@Html.DisplayNameFor(model => model.UserName)</b></h5>
+            <div class="d-flex flex-wrap">
+                <h6>@Html.DisplayFor(model => model.UserName)</h6>
+            </div>
+        </div>
+        <div class="col-2">
+            <h5><b>@Html.DisplayNameFor(model => model.Email)</b></h5>
+            <div class="flex-wrap">
+                <h6>@Html.DisplayFor(model => model.Email)</h6>
+            </div>
+        </div>
+        <div class="col-2">
+            <h5><b>@Html.DisplayNameFor(model => model.EmailConfirmed)</b></h5>
+            <div class="d-flex flex-wrap">
+                <h6>@Html.DisplayFor(model => model.EmailConfirmed)</h6>
+            </div>
+        </div>
+        <div class="col-8">
+        </div>
+
+        <div class="col-2">
+            <h5><b>@Html.DisplayNameFor(model => model.Firstname)</b></h5>
+            <div class="d-flex flex-wrap">
+                <h6>@Html.DisplayFor(model => model.Firstname)</h6>
+            </div>
+        </div>
+        <div class="col-2">
+            <h5><b>@Html.DisplayNameFor(model => model.Lastname)</b></h5>
+            <div class="d-flex flex-wrap">
+                <h6>@Html.DisplayFor(model => model.Lastname)</h6>
+            </div>
+        </div>
+        <div class="col-8">
+        </div>
+        <p></p>
+        <div class="col-12">
+            <h5><b>@Html.DisplayNameFor(model => model.BirthDate)</b></h5>
+            <div class="d-flex flex-wrap">
+                <h6>@Convert.ToDateTime(Model.BirthDate).ToString("dd.MM.yyyy")</h6>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Users" class="btn btn-danger">Cancel</a>
+</div>

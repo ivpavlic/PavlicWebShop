@@ -7,6 +7,8 @@ namespace PavlicWebShop.Models.Binding
     public class ProductUpdateBinding : ProductBase
     {
         public int Id { get; set; }
+
+        [Display(Name = "Product Category")]
         public ProductCategoryViewModel ProductCategory { get; set; }
         public int ProductCategoryId { get; set; }
 

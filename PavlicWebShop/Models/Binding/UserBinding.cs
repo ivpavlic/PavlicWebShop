@@ -35,6 +35,9 @@ namespace PavlicWebShop.Models.Binding
     {
         public bool EmailConfirmed { get; set; }
         public AdressViewModel UserAdress { get; set; }
+
+        [UserValidation]
+        public string Email { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public string Country { get; set; }

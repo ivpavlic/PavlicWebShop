@@ -1,16 +1,14 @@
-﻿@model PavlicWebShop.Models.ViewModel.ProductCategoryViewModel
-
+﻿@model PavlicWebShop.Models.Binding.ProductCategoryBinding
 @{
-    ViewData["Title"] = "AddProductCategory";
+    ViewData["Title"] = "NewProductCategory";
 }
 
-<h1>AddProductCategory</h1>
+<h3>New Product Category</h3>
 
-<h4>ProductCategoryViewModel</h4>
 <hr />
+<form action="/Product/AddProductCategory" method="post" enctype="multipart/form-data">
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddProductCategory">
+    <div class="card col-md-6">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -22,17 +20,15 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+             <div class="col-12">
+                <input type="submit" class="btn btn-success" value="Submit"><a></a>
+                <a asp-action="ProductCategorysList" class="btn btn-danger">Cancel</a>
             </div>
-        </form>
-    </div>
+        </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+</form>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
