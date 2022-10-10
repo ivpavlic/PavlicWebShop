@@ -10,11 +10,13 @@ namespace PavlicWebShop.Controllers
     public class UserController : Controller
     {
         private readonly IUserService userService;
+        private readonly IProductService productService;
         private readonly SignInManager<ApplicationUser> signInManager;
-        public UserController(IUserService userSevice, SignInManager<ApplicationUser> signInManager)
+        public UserController(IUserService userSevice, SignInManager<ApplicationUser> signInManager, IProductService productService)
         {
             this.userService = userSevice;
             this.signInManager = signInManager;
+            this.productService = productService;   
         }
 
         public IActionResult Registration()
@@ -33,5 +35,11 @@ namespace PavlicWebShop.Controllers
             }
             return View();
         }
+
+        public IActionResult Index()
+        {
+            return View(productService.GetProducts().Result);
+        }
+
     }
 }

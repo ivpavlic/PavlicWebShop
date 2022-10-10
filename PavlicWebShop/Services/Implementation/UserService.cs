@@ -65,7 +65,7 @@ namespace PavlicWebShop.Services.Implementation
             return roles.First();
 
         }
-
+        
 
         public async Task<ApplicationUserViewModel> UpdateUser(UserAdminUpdateBinding model)
         {
@@ -74,7 +74,6 @@ namespace PavlicWebShop.Services.Implementation
                 .FirstOrDefaultAsync(x => x.Id == model.Id);
             var role = await db.Roles.FindAsync(model.RoleId);
 
-
             if (dboUser == null || role == null)
             {
                 return null;
@@ -82,8 +81,16 @@ namespace PavlicWebShop.Services.Implementation
 
             await DeleteAllUserRoles(dboUser);
             await userManager.AddToRoleAsync(dboUser, role.Name);
+            var adress = await db.Adress
+              //.Include(x => x.ProductCategory)
+              .FirstOrDefaultAsync(x => x.ApplicationUser.Id == model.Id);
+            db.Adress.Remove(adress);
+
 
             mapper.Map(model, dboUser);
+
+            var adressDb = mapper.Map<Adress>(model.UserAdress);
+            dboUser.Adress = new List<Adress>() { adressDb };
 
             await db.SaveChangesAsync();
 
@@ -110,13 +117,19 @@ namespace PavlicWebShop.Services.Implementation
                 .Include(x => x.Adress)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
+            var adress = await db.Adress
+               //.Include(x => x.ProductCategory)
+               .FirstOrDefaultAsync(x => x.ApplicationUser.Id == id);
+
             if (dboUser == null)
             {
                 return null;
             }
-
+            var adressDb = mapper.Map<AdressViewModel>(adress);
             var response = mapper.Map<ApplicationUserViewModel>(dboUser);
+
             response.Role = await GetUserRole(id);
+            response.UserAdress = adressDb;
             return response;
         }
 

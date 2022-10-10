@@ -162,5 +162,6 @@ namespace PavlicWebShop.Data
         public DbSet<FileStorage> FileStorage { get; set; }
         public DbSet<PavlicWebShop.Models.ViewModel.ProductCategoryViewModel> ProductCategoryViewModel { get; set; }
         public DbSet<PavlicWebShop.Models.ViewModel.ApplicationUserViewModel> ApplicationUserViewModel { get; set; }
+        public DbSet<PavlicWebShop.Models.ViewModel.ProductViewModel> ProductViewModel { get; set; }
     }
 }

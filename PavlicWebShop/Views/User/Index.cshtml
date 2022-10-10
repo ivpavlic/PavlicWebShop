@@ -1,0 +1,50 @@
+﻿@using PavlicWebShop.Models.ViewModel
+@model List<ProductViewModel>
+@{
+    var r = new Random();
+    var tenRandomProduct = Model.OrderBy(u => r.Next()).Take(10);
+}
+@*<style>
+    .card-img-top {
+    width: 100%;
+    height: 18vw;
+    object-fit: cover;
+}
+</style>*@
+
+    <section class="row g-3">
+
+        @foreach (var product in tenRandomProduct)
+        {
+
+            if (@product.ProductImgUrl != null)
+            {
+                string path = @product.ProductImgUrl;
+                <div class="col-md-3 card">
+                    <div class="embed-responsive embed-responsive-1by1">
+                        <img src=@Url.Content(product.ProductImgUrl) class="card-img-top embed-responsive-item" width="70" height="150" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Title</h5>
+                        <p class="card-text">@product.Price kn</p>
+                        <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                <div class="col-md-3 card">
+                    <div class="embed-responsive embed-responsive-1by1">
+                <img src="~/noimage.png" class="card-img-top embed-responsive-item" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Title</h5>
+                        <p class="card-text">@product.Price Kn</p>
+                        <a asp-action="DetailsProduct" asp-route-id="@product.Id" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            }
+        }
+    </section>
+<!-- /.content -->
