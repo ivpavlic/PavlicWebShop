@@ -20,9 +20,9 @@
             if (@product.ProductImgUrl != null)
             {
                 string path = @product.ProductImgUrl;
-                <div class="col-md-3 card">
+                <div class="col-sm-3 card">
                     <div class="embed-responsive embed-responsive-1by1">
-                        <img src=@Url.Content(product.ProductImgUrl) class="card-img-top embed-responsive-item" width="70" height="150" alt="...">
+                        <img src=@Url.Content(product.ProductImgUrl) class="card-img-top embed-responsive-item" width="70" height="130" alt="...">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">@product.Title</h5>
@@ -34,7 +34,7 @@
             }
             else
             {
-                <div class="col-md-3 card">
+                <div class="col-sm-3 card">
                     <div class="embed-responsive embed-responsive-1by1">
                 <img src="~/noimage.png" class="card-img-top embed-responsive-item" alt="...">
                     </div>

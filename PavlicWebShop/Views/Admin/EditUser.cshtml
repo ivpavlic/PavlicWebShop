@@ -19,6 +19,7 @@
                 <div class="col-4">
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
+                <label asp-for="RoleId" class="control-label">Role</label>
                 <select name="RoleId" class="form-control">
                     @foreach (var item in userRoles)
                     {
@@ -96,18 +97,7 @@
                         <label class="control-label"></label>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="form-group">
-                        <label asp-for="Password" class="control-label"></label>
-                        <input type="password" asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-8">
-                    <div class="form-group">
-                        <label class="control-label"></label>
-                    </div>
-                </div>
+            
                 <div class="col-8">
                     <div class="form-group">
                         <label asp-for="EmailConfirmed" class="control-label">Active</label>

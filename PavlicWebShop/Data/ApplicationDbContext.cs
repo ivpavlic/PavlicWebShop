@@ -98,7 +98,7 @@ namespace PavlicWebShop.Data
                     ProductCategoryId = 1,
                     Quantity = 20,
                     Price = 120,
-                    ProductImgUrl = "~/Vino/vinarija_kaptol_grasevina.png",
+                    ProductImgUrl = "~/Vino/vinarija_kaptol_grasevina.jpg",
                 },
                 new Product
                 {
@@ -109,7 +109,7 @@ namespace PavlicWebShop.Data
                     ProductCategoryId = 1,
                     Quantity = 50,
                     Price = 180,
-                    ProductImgUrl = "~/Vino/krauthaker-muskat_zuti_1.png",
+                    ProductImgUrl = "~/Vino/krauthaker-muskat_zuti_1.jpg",
                 },
                 new Product
                 {
